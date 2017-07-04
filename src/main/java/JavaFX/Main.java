@@ -1,6 +1,12 @@
 package JavaFX;
 
+import Checkers.Board;
+import Checkers.Color;
+import Checkers.Coordinate;
+import Checkers.Playboard;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -17,7 +23,13 @@ public class Main extends Application {
 //        primaryStage.show();
 //        gameboard.setCurrent(new Coordinate(0, 4));
 //        gameboard.move(new Coordinate(2, 2));
-    //    gameboard.setCurrent(new Coordinate(4,2));
+//        gameboard.setCurrent(new Coordinate(0,0));
+//        gameboard.move(new Coordinate(3, 3));
+//        gameboard.setCurrent(new Coordinate(2, 2));
+//        gameboard.move(new Coordinate(4, 4));
+
+
+
   //      gameboard.move(new Coordinate(1, 3));
 //        gameboard.setCurrent(new Coordinate(5, 5));
 //        gameboard.move(new Coordinate(4, 4));

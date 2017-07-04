@@ -6,23 +6,19 @@ import javafx.beans.property.StringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Game {
-    static boolean gameInProgress;
-    static Gameboard gameboard;
     static Stage menuStage = new Stage();
     static Scene menuScene;
 
     static public void start() {
-
+        menuStage.setMaximized(false);
         menuStage.setMaximized(true);
         menuStage.setTitle("Checkers 1.0 Alpha");
         menuStage.minHeightProperty().setValue(500);
@@ -132,5 +128,28 @@ public class Game {
         menuStage.setScene(menuScene);
         menuStage.setMaximized(false);
         menuStage.setMaximized(true);
+    }
+
+    static void end(int i) {
+
+
+
+        Label l = new Label();
+        l.setStyle("-fx-font-size: 50");
+        l.setTextFill(Color.RED);
+
+        switch (i) {
+            case(1): {
+                l.textProperty().setValue("WHITE WINS");
+            }
+            case(2): {
+                l.textProperty().setValue("BLACK WINS");
+            }
+        }
+        BorderPane endPane = new BorderPane(l);
+        Scene endScene = new Scene(endPane);
+        endPane.setOnMouseClicked(event -> Game.start());
+        menuStage.setScene(endScene);
+        menuStage.show();
     }
 }

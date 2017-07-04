@@ -7,6 +7,17 @@ public class Playboard {
     private Board board;
     private Color pColor;
     private Color currentColor = Color.WHITE;
+    private int whiteQuantity;
+    private int blackQuantity;
+
+    public int getBlackQuantity() {
+        return blackQuantity;
+    }
+
+    public int getWhiteQuantity() {
+
+        return whiteQuantity;
+    }
 
     private Coordinate currentChecker;
     private MovementCalculator movement;
@@ -43,15 +54,11 @@ public class Playboard {
         }
     }
 
-    public Playboard(Board board, Color pColor, int crazymegahelltestboard) {
+    public Playboard() {
         this.board = board;
         this.pColor = pColor;
         this.movement = new MovementCalculator(pColor, board);
         this.size = board.getSize();
-        board.setCell(new Coordinate(0, 4), new Checker(Color.WHITE));
-        board.getChecker(new Coordinate(0, 4)).setQueen();
-//      board.setCell(new Coordinate(0, 2), new Checker(Color.WHITE));
-        board.setCell(new Coordinate(0, 0), new Checker(Color.BLACK));
     }
 
     public int setCurrent(Coordinate coordinate) {
@@ -122,6 +129,7 @@ public class Playboard {
         strokeMoves.clear();
         swapCurrentColor();
         addStrokeMovements();
+        updateCheckersQuantity();
         checkBorders();
     }
 
@@ -264,6 +272,23 @@ public class Playboard {
         }
     }
 
+    private void updateCheckersQuantity() {
+        int whiteQuantity = 0;
+        int blackQuantity = 0;
+        for (int v = 0; v < size; v++) {
+            for (int h = 0; h < size; h++) {
+                Checker checker = board.getChecker(new Coordinate(h,v));
+                if (checker != null) {
+                    if (checker.getColor() == Color.WHITE)
+                        whiteQuantity++;
+                    else
+                        blackQuantity++;
+                }
+            }
+        }
+        this.whiteQuantity = whiteQuantity;
+        this.blackQuantity = blackQuantity;
+    }
 
     public int getSize() {
         return board.getSize();

@@ -16,6 +16,11 @@ class Gameboard {
     private GridPane gameboardPane;
     private FXChecker currentChecker;
     private FXBoard fxBoard;
+    private int end;
+
+    public int getEnd() {
+        return end;
+    }
 
     Gameboard(Playboard playboard, Board board) {
         this.playboard = playboard;
@@ -33,7 +38,7 @@ class Gameboard {
         for (HashMap.Entry<Coordinate, FXBoard.FXCell> entry : fxBoard.getBoard().entrySet()) {
             Coordinate coordinate = entry.getKey();
             FXBoard.FXCell cell = entry.getValue();
-            FXChecker checker = cell.getChecker(coordinate);
+            FXChecker checker = cell.getChecker();
             cell.setOnMouseClicked(c -> {
                 if (currentChecker != null) {
                     move(coordinate);
@@ -72,7 +77,7 @@ class Gameboard {
         }
     }
 
-    private void move(Coordinate coordinate) {
+     void move(Coordinate coordinate) {
         List<MovementCalculator.StrokeMove> strokeMoves = playboard.getStrokeMoves();
         FXChecker checkerToDestroy = null;
         if (!(strokeMoves.isEmpty())) {
@@ -106,6 +111,23 @@ class Gameboard {
                 fxBoard.alarmCell(coordinateAlarmCell);
             }
         }
+
+        int checkForEnd = checkForEnd();
+
+        if (checkForEnd != 0) {
+            Game.end(checkForEnd);
+        }
+
+    }
+
+    private int checkForEnd() {
+        if (playboard.getWhiteQuantity() == 0) {
+            return 1;
+        }
+        if (playboard.getBlackQuantity() == 0) {
+            return 2;
+        }
+        return 0;
     }
 }
 

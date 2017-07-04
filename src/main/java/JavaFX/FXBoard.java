@@ -35,14 +35,14 @@ class FXBoard {
 
     class FXCell extends Rectangle {
 
-        FXChecker fxChecker;
+        private FXChecker fxChecker;
 
         FXCell(Color color) {
             super(60, 60);
             super.setFill(color);
         }
 
-        FXChecker getChecker(Coordinate coordinate) {
+        FXChecker getChecker() {
             return fxChecker;
         }
     }
